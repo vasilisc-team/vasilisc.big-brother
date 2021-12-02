@@ -1,0 +1,88 @@
+name: Docker image stage CI
+
+on:
+  workflow_dispatch:
+  push:
+    # branches-ignore:
+    #   - master
+    paths-ignore:
+      - README.md
+      - .gitignore
+      - .gitattributes
+      - .editorconfig
+      - research/**
+  pull_request:
+    paths-ignore:
+      - README.md
+      - .gitignore
+      - .gitattributes
+      - .editorconfig
+      - research/**
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Cache env
+        id: cache-env
+        uses: actions/cache@v2.1.3
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ runner.os }}-${{ env.pythonLocation }}-${{ hashFiles('app/requirements/main.txt') }}
+      - name: Create env
+        if: steps.cache-env.outputs.cache-hit != 'true'
+        run: |
+          pip install -r app/requirements/main.txt
+      - name: Test requirements
+        run: |
+          python3 ./app/manage.py test --failfast >/tmp/django.test 2>&1
+      - name: Send Telegram notification
+        if: ${{ failure() }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TG_TO }}
+          token: ${{ secrets.TG_BOT_TOKEN }}
+          disable_web_page_preview: true
+          format: markdown
+          message: |
+            `Info: Django tests failed!!!`
+            `Commit Message: ${{ github.event.head_commit.message }}`
+            `Committed Actor: ${{ github.actor }}`
+            `Build Info:` https://github.com/${{ github.repository }}/commit/${{ github.sha }}/checks
+          document: /tmp/django.test
+
+  build:
+    needs:
+      - test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker images
+        run: |
+          docker build --force-rm --build-arg GITHUB_SHA -t ghcr.io/${{ github.repository }} -f Dockerfile app
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN  }}
+      - name: Push Docker images
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository }}
+          docker tag $IMAGE_ID:latest $IMAGE_ID:$GITHUB_SHA
+          docker push --all-tags $IMAGE_ID
+      - name: Send Telegram notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TG_TO }}
+          token: ${{ secrets.TG_BOT_TOKEN }}
+          disable_web_page_preview: true
+          format: markdown
+          message: |
+            `Commit Message: ${{ github.event.head_commit.message }}`
+            `Committed Actor: ${{ github.actor }}`
+            `New Image:      ghcr.io/${{ github.repository }}:{{ commit.sha }}`
