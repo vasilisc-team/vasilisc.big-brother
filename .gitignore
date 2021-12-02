@@ -1,0 +1,43 @@
+# Environments
+.venv*
+.env*
+env*
+venv*
+
+# IDE
+.vscode
+.idea
+
+# Node JS
+node_modules
+*/node_modules
+
+# OS
+.DS_Store
+Thumbs.db
+
+# jupyter
+.ipynb_checkpoints
+
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# mypy
+.mypy_cache/
+
+# pytest
+.pytest_cache/
+
+# Distribution  packagingbuild/
+build
+dist
+pip-wheel-metadata/
+*.egg-info/
+
+# Private data
+# Certificates
+/certs
