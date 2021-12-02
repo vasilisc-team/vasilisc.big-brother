@@ -5,15 +5,15 @@
 
 Python         |  Django   | Docker  | Pandas   | Sklearn   | TensorFlow | NymPy |
 :------------------------:|:------------------------:|:----------------------:|:----------------------:|:----------------------:|:----------------------:|:----------------------:|
-<img src=https://e.sfu-kras.ru/pluginfile.php/1794713/course/overviewfiles/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF.jpg width="64" height="64" />|<img src=https://to-moore.com/images/django.png width="64" height="64" />|<img src=https://www.kubeclusters.com/img/index/docker-logo.png width="64" height="64" />|<img src=https://jehyunlee.github.io/thumbnails/Python-DS/1-pandas1.png width=64 height=64/>|<img src=https://pythondatalab.files.wordpress.com/2015/04/skl-logo.jpg width=64 height=64/>|<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/TensorFlowLogo.svg/1200px-TensorFlowLogo.svg.png width="64" height="64" />|<img src=https://user-images.githubusercontent.com/82882128/132093816-429d9b14-941f-4c52-adfa-4bc9ac426a03.png width="64" height="64" />| 
+<img src=https://e.sfu-kras.ru/pluginfile.php/1794713/course/overviewfiles/%D0%9B%D0%BE%D0%B3%D0%BE%D1%82%D0%B8%D0%BF.jpg width="64" height="64" />|<img src=https://to-moore.com/images/django.png width="64" height="64" />|<img src=https://www.kubeclusters.com/img/index/docker-logo.png width="64" height="64" />|<img src=https://jehyunlee.github.io/thumbnails/Python-DS/1-pandas1.png width=64 height=64/>|<img src=https://pythondatalab.files.wordpress.com/2015/04/skl-logo.jpg width=64 height=64/>|<img src=https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/TensorFlowLogo.svg/1200px-TensorFlowLogo.svg.png width="64" height="64" />|<img src=https://user-images.githubusercontent.com/82882128/132093816-429d9b14-941f-4c52-adfa-4bc9ac426a03.png width="64" height="64" />|
 
 
 [![github workflow CI img]][github workflow CI]
 
-[github workflow CI img]: https://github.com/xausssr/vasilisc.budget/actions/workflows/build-ci.yaml/badge.svg
-[github workflow CI]: https://github.com/xausssr/vasilisc.budget/actions/workflows/build-ci.yaml
+[github workflow CI img]: https://github.com/vasilisc-team/vasilisc.big-brother/actions/workflows/build-ci.yaml/badge.svg
+[github workflow CI]: https://github.com/vasilisc-team/vasilisc.big-brother/actions/workflows/build-ci.yaml
 
-Сервис представляет собой веб-приложение, упрощающее работу аналитика и позволяющее планировать региональный бюджет на основе различных моделей анализа, в том числе, искусственных нейронных сетей. Аналитик может посмотреть дашборд с представлением наиболее влиятельных метрик, сводной статистики и прогнозом, автоматически созданным системой, а также загрузить данные о бюджете за предыдущие периоды для просмотра нового прогноза. 
+Сервис представляет собой веб-приложение, упрощающее работу аналитика и позволяющее планировать региональный бюджет на основе различных моделей анализа, в том числе, искусственных нейронных сетей. Аналитик может посмотреть дашборд с представлением наиболее влиятельных метрик, сводной статистики и прогнозом, автоматически созданным системой, а также загрузить данные о бюджете за предыдущие периоды для просмотра нового прогноза.
 
 
 Уникальность: возможность загрузки данных напрямую в модель и их автоматический анализ, построение отдельных моделей планирования для наиболее значимых параметров, прогнозирвоание консолидирвоанного бюджета на основе ARIMA, исторических данных, предсказаний предыдущего шага, предсказание бюджета на основе ИНС, выдача сводной статистики.
@@ -48,7 +48,7 @@ Python         |  Django   | Docker  | Pandas   | Sklearn   | TensorFlow | NymPy
 Необходим Docker.
 
 # Установка веб-сервера
-Данный репозиторий имеет настроеный ci/cd пайплайн, автоматически собирающий актуальный docker-контейнер. 
+Данный репозиторий имеет настроеный ci/cd пайплайн, автоматически собирающий актуальный docker-контейнер.
 
 Установка:
 
