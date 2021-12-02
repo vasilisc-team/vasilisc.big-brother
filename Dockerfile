@@ -24,4 +24,4 @@ RUN python3 -m pip install --upgrade pip \
 RUN echo ${GITHUB_SHA} > .git_commit
 
 EXPOSE 19999
-CMD ["python", "./manage.py", "runsslserver", "0.0.0.0:19999", "--static", "--certificate", "/app/certs/certificate.crt", "--key", "/app/certs/certificate.key"]
+CMD ["python", "./manage.py", "runsslserver", "0.0.0.0:19998", "--static", "--certificate", "/app/certs/certificate.crt", "--key", "/app/certs/certificate.key"]
