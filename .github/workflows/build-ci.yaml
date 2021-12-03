@@ -72,11 +72,13 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN  }}
       - name: Push Docker images
+        if: ${{ github.ref == 'refs/heads/master' }}
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository }}
           docker tag $IMAGE_ID:latest $IMAGE_ID:$GITHUB_SHA
           docker push --all-tags $IMAGE_ID
       - name: Send Telegram notification
+        if: ${{ github.ref == 'refs/heads/master' }}
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TG_TO }}
@@ -84,9 +86,21 @@ jobs:
           disable_web_page_preview: true
           format: markdown
           message: |
-            `Commit Message: ${{ github.event.head_commit.message }}`
+            `Commit Message:  ${{ github.event.head_commit.message }}`
             `Committed Actor: ${{ github.actor }}`
-            `New Image:      ghcr.io/${{ github.repository }}:{{ commit.sha }}`
+            `New Image:       ghcr.io/${{ github.repository }}:{{ commit.sha }}`
+      - name: Send Telegram build notification
+        if: ${{ github.ref != 'refs/heads/master' }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TG_TO }}
+          token: ${{ secrets.TG_BOT_TOKEN }}
+          disable_web_page_preview: true
+          format: markdown
+          message: |
+            `Success build`
+            `Commit Message:  ${{ github.event.head_commit.message }}`
+            `Committed Actor: ${{ github.actor }}`
 
   build-azure:
     needs:
@@ -104,20 +118,24 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN  }}
       - name: Push Docker images
+        if: ${{ github.ref == 'refs/heads/master' }}
         run: |
           IMAGE_ID=ghcr.io/${{ github.repository }}
           docker tag $IMAGE_ID:latest $IMAGE_ID:$GITHUB_SHA
           docker push --all-tags $IMAGE_ID
       - name: Azure Login
+        if: ${{ github.ref == 'refs/heads/master' }}
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: Restart Azure container
+        if: ${{ github.ref == 'refs/heads/master' }}
         uses: azure/CLI@v1
         with:
           inlineScript: |
             az container restart --name vasilisc-big-brother --resource-group container-group --no-wait --subscription 093ca979-0083-45f3-ac04-9e4bfd3483d0
       - name: Send Telegram notification
+        if: ${{ github.ref == 'refs/heads/master' }}
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TG_TO }}
@@ -125,6 +143,18 @@ jobs:
           disable_web_page_preview: true
           format: markdown
           message: |
-            `Commit Message: ${{ github.event.head_commit.message }}`
+            `Commit Message:  ${{ github.event.head_commit.message }}`
             `Committed Actor: ${{ github.actor }}`
-            `New Image:      ghcr.io/${{ github.repository }}:{{ commit.sha }}`
+            `New Image:       ghcr.io/${{ github.repository }}:{{ commit.sha }}`
+      - name: Send Telegram build notification
+        if: ${{ github.ref != 'refs/heads/master' }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TG_TO }}
+          token: ${{ secrets.TG_BOT_TOKEN }}
+          disable_web_page_preview: true
+          format: markdown
+          message: |
+            `Success build`
+            `Commit Message:  ${{ github.event.head_commit.message }}`
+            `Committed Actor: ${{ github.actor }}`
