@@ -108,6 +108,15 @@ jobs:
           IMAGE_ID=ghcr.io/${{ github.repository }}
           docker tag $IMAGE_ID:latest $IMAGE_ID:$GITHUB_SHA
           docker push --all-tags $IMAGE_ID
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Restart Azure container
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az container restart --name vasilisc-big-brother --resource-group container-group --no-wait --subscription 093ca979-0083-45f3-ac04-9e4bfd3483d0
       - name: Send Telegram notification
         uses: appleboy/telegram-action@master
         with:
