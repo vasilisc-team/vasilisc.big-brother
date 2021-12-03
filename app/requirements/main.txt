@@ -1,5 +1,7 @@
 Django==3.2.7
 django-sslserver==0.22
 
+Pillow==8.4.0
+
 # commented for test
 #tensorflow==2.7.0
