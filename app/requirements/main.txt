@@ -3,5 +3,14 @@ django-sslserver==0.22
 
 Pillow==8.4.0
 
-# commented for test
-#tensorflow==2.7.0
+tensorflow==2.7.0
+
+#  GFPGAN (https://github.com/TencentARC/GFPGAN/blob/v0.2.0/requirements.txt)
+facexlib
+lmdb
+numpy
+opencv-python
+pyyaml
+torch>=1.7
+torchvision
+gfpgan>=0.2.1

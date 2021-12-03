@@ -39,3 +39,6 @@ pip-wheel-metadata/
 # Private data
 # Certificates
 /certs
+
+# Big models
+*.pth
