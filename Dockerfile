@@ -7,6 +7,9 @@ LABEL com.centurylinklabs.watchtower.lifecycle.post-update="/app/run_report.sh"
 
 # Set language
 ENV LANG=en_US.UTF-8
+ENV TZ=Europe/Moscow
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Create and activate python venv
 ENV VIRTUAL_ENV=/app/env
