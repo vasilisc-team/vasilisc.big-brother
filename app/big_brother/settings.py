@@ -31,7 +31,12 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-ALLOWED_HOSTS = ["vasilisc.ru", "8a770890bca3.sn.mynetname.net", "127.0.0.1"]
+ALLOWED_HOSTS = [
+    "vasilisc.ru",
+    "8a770890bca3.sn.mynetname.net",
+    "big-brother-vasilisc.germanywestcentral.azurecontainer.io",
+    "127.0.0.1",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",

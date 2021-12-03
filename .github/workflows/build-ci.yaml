@@ -56,6 +56,7 @@ jobs:
           document: /tmp/django.test
 
   build:
+    if: ${{ false }} # disable for now
     needs:
       - test
     runs-on: ubuntu-latest
@@ -64,6 +65,38 @@ jobs:
       - name: Build Docker images
         run: |
           docker build --force-rm --build-arg GITHUB_SHA -t ghcr.io/${{ github.repository }} -f Dockerfile app
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN  }}
+      - name: Push Docker images
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository }}
+          docker tag $IMAGE_ID:latest $IMAGE_ID:$GITHUB_SHA
+          docker push --all-tags $IMAGE_ID
+      - name: Send Telegram notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TG_TO }}
+          token: ${{ secrets.TG_BOT_TOKEN }}
+          disable_web_page_preview: true
+          format: markdown
+          message: |
+            `Commit Message: ${{ github.event.head_commit.message }}`
+            `Committed Actor: ${{ github.actor }}`
+            `New Image:      ghcr.io/${{ github.repository }}:{{ commit.sha }}`
+
+  build-azure:
+    needs:
+      - test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Docker images
+        run: |
+          docker build --force-rm --build-arg GITHUB_SHA -t ghcr.io/${{ github.repository }} -f Dockerfile.azure app
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
