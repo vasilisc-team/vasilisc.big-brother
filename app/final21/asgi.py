@@ -1,5 +1,5 @@
 """
-ASGI config for big_brother project.
+ASGI config for final21 project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'big_brother.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'final21.settings')
 
 application = get_asgi_application()

@@ -1,0 +1,115 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cam</title>
+    <link rel="stylesheet" href={% static 'css/carousel.css' %} type="text/css" media="all" />
+    <link rel="stylesheet" href={% static 'css/cam.css' %} type="text/css" media="all" />
+    <script src={% static "js/carousel.js" %}></script>
+    <script src={% static "js/photoclick.js" %}></script>
+</head>
+
+
+<body>
+    <div class="page-contener">
+
+        <div class="navigator">
+            <div class="command-name">Василиск</div>
+            <div class="links">
+                <a href="main">Главная</a>
+                <a href="cam">Камеры</a>
+                <a href="mat">Материалы</a>
+                <a href="team">Команда</a>
+            </div>
+        </div>
+
+        <div class="container-text">Мусорные контейнеры</div>
+        <div class="corusel-container">
+            <div class="carousel-3d">
+                <figure>
+                    <!-- Сюда бы цикл, посоны -->
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo.jpg' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo1.jpg' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo4.png' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo5.png' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo.jpg' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo1.jpg' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo4.png' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo5.png' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo.jpg' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo1.jpg' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo4.png' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo5.png' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo.jpg' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo1.jpg' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo4.png' %}" alt="" /></div>
+                    <div class="corusel-item upper-coruselitem"><img src="{% static 'images/photo5.png' %}" alt="" /></div>
+                </figure>
+                <nav>
+                    <button class="nav prev">Назад</button>
+                    <button class="nav next">Вперед</button>
+                </nav>
+            </div>
+        </div>
+        <form method="post" action="ImageRubbishUpload" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="upload-photo" name="load">
+            Загрузить фото
+        </button>
+        </form>
+
+        <img src="{{ img_obj_rubbish }}" class="photo-container upper-photocontainer" alt="connect" style="max-width:700px" style="max-height:700px">
+
+        <div class="divider"></div>
+
+        <div class="container-text">Улучшение качества фото</div>
+        <div class="corusel-container">
+            <div class="carousel-3d">
+                <figure>
+                    <!-- Сюда бы цикл, посоны -->
+                    <div class="corusel-item down-coruselitem"><img src="{% static 'images/photo.jpg' %}" alt="" /></div>
+                    <div class="corusel-item down-coruselitem"><img src="{% static 'images/photo1.jpg' %}" alt="" /></div>
+                    <div class="corusel-item down-coruselitem"><img src="{% static 'images/photo4.png' %}" alt="" /></div>
+                    <div class="corusel-item down-coruselitem"><img src="{% static 'images/photo.jpg' %}" alt="" /></div>
+                    <div class="corusel-item down-coruselitem"><img src="{% static 'images/photo1.jpg' %}" alt="" /></div>
+                    <div class="corusel-item down-coruselitem"><img src="{% static 'images/photo4.png' %}" alt="" /></div>
+                    <div class="corusel-item down-coruselitem"><img src="{% static 'images/photo.jpg' %}" alt="" /></div>
+                    <div class="corusel-item down-coruselitem"><img src="{% static 'images/photo1.jpg' %}" alt="" /></div>
+                    <div class="corusel-item down-coruselitem"><img src="{% static 'images/photo4.png' %}" alt="" /></div>
+                </figure>
+                <nav>
+                    <button class="nav prev">Назад</button>
+                    <button class="nav next">Вперед</button>
+                </nav>
+            </div>
+        </div>
+
+        <form method="post" action="ImageFaceUpload" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="upload-photo" name="load">
+            Загрузить фото
+        </button>
+        </form>
+
+        <img src="{{ img_obj_face }}" class="photo-container upper-photocontainer" alt="connect" style="max-width:700px" style="max-height:700px">
+
+
+        </div>
+
+        <div class="footer">
+            <div class="command-name">© Василиск</div>
+            <div class="icon">
+                <img src="{% static 'icons/icon.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
