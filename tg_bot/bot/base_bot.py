@@ -3,7 +3,7 @@ import logging
 from typing import Any, Callable, List
 
 import aiogram.utils.markdown as md
-from aiogram import Bot
+from aiogram import Bot, Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, ParseMode, ReplyKeyboardRemove
 
@@ -15,7 +15,12 @@ log = logging.getLogger(__name__)
 class BaseBot(Bot):
     def __init__(self, config: BotConfig):
         super().__init__(token=config.telegram_token)
-        # self.loop = asyncio.get_event_loop()
+
+    async def on_startup(self, disp: Dispatcher) -> None:  # pylint:disable=unused-argument
+        ...
+
+    async def on_shutdown(self, disp: Dispatcher) -> None:  # pylint:disable=unused-argument
+        ...
 
     async def cancel_handler(self, message: Message, state: FSMContext) -> None:
         current_state = await state.get_state()
@@ -31,6 +36,7 @@ class BaseBot(Bot):
             md.text(
                 md.bold("Help"),
                 md.escape_md("/go - Начать работу!"),
+                md.escape_md("/problem - Сообщить о проблеме"),
                 md.escape_md("/help - Справка"),
                 sep="\n",
             ),
