@@ -43,20 +43,25 @@ Python         |  Django   | Docker  | Pandas   | Sklearn   | TensorFlow | NymPy
   * ручная разметка
   * анализ линейной разделимости рабочих и не рабочих фонарей в ночное время
 
-----------
-# Планируем до СТОП_КОДИНГА:
-
-# Docker контейнер
+# Установка решения
+```bash
+git clone https://github.com/vasilisc-team/vasilisc.big-brother.git
+docker build Dockerfile
+```
 
 # Telegram-бот
+@VasiliscBigBrotherbot - бот для демонстрации основных моделей и сбора фидбека.
 
-----------
+* `/go` - начало работы и выбор действия (анализ)
+* `/report` - начало работы и выбор действия (сообщение о проблеме)
+* для работы моделей бот принимает фотогорафии
+
 # Команда
 Толстых Андрей &minus; analitics, ML [<img src=https://pbs.twimg.com/media/ErZeb4AXYAAuKFm.jpg width="15" height="15" />](https://t.me/tolstykhaa)
 
 Ельчугин Максим &minus; fullstack, CI/CD  [<img src=https://pbs.twimg.com/media/ErZeb4AXYAAuKFm.jpg width="15" height="15" />](https://t.me/pariah_max)
 
-Суворов Арнольд &minus; analitics, ML [<img src=https://pbs.twimg.com/media/ErZeb4AXYAAuKFm.jpg width="15" height="15" />](https://t.me/SSHINRATENSSEI)
+Суворов Арнольд &minus; frontend [<img src=https://pbs.twimg.com/media/ErZeb4AXYAAuKFm.jpg width="15" height="15" />](https://t.me/SSHINRATENSSEI)
 
 Маямсин Сергей &minus; backend [<img src=https://pbs.twimg.com/media/ErZeb4AXYAAuKFm.jpg width="15" height="15" />](https://t.me/Sinserelyyy)
 
